@@ -14,7 +14,6 @@ const saveFormState = throttle(() => {
   localStorage.setItem(localStorageKey, JSON.stringify(formState));
 }, 500);
 
-// Заповнення полів форми збереженими значеннями при завантаженні сторінки
 window.addEventListener('DOMContentLoaded', () => {
   const savedFormState = localStorage.getItem(localStorageKey);
   if (savedFormState) {
@@ -24,10 +23,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Відстежування події input та збереження стану форми
 feedbackForm.addEventListener('input', saveFormState);
 
-// Обробка сабміту форми
 feedbackForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -36,14 +33,11 @@ feedbackForm.addEventListener('submit', (event) => {
     message: messageTextarea.value,
   };
 
-  // Очищення полів форми
   emailInput.value = '';
   messageTextarea.value = '';
 
-  // Очищення сховища
   localStorage.removeItem(localStorageKey);
 
-  // Виведення об'єкту з полями email та message у консоль
   console.log(formState);
 });
 
